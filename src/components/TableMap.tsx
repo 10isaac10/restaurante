@@ -15,7 +15,7 @@ import {
 interface TableMapProps {
   tables: Table[];
   orders: Order[];
-  onUpdateTableStatus: (tableId: string, status: TableStatus) => void;
+  onUpdateTableStatus: (tableId: string, status: TableStatus, reservationName?: string) => void;
   onSelectTableForOrder: (tableId: string) => void;
   onGoToCheckout: (orderId: string) => void;
 }
@@ -146,7 +146,12 @@ export default function TableMap({
                     <div className="text-center py-2">
                        <span className="text-3xl font-bold text-slate-800 tracking-tight font-sans">
                         Mesa {table.number}
-                      </span>
+                       </span>
+                       {table.status === 'reservada' && table.reservationName && (
+                         <span className="block text-xs text-amber-700 font-semibold mt-1 truncate max-w-full px-2">
+                           {table.reservationName}
+                         </span>
+                       )}
                     </div>
 
                     {/* Order summary ticker if applicable */}
@@ -182,6 +187,20 @@ export default function TableMap({
                     <span>Capacidad: {selectedTable.capacity} comensales</span>
                   </div>
                 </div>
+
+                {selectedTable.status === 'reservada' && (
+                  <div className="mt-4 p-3.5 bg-amber-50/50 border border-amber-200 rounded-2xl space-y-2">
+                    <label className="block text-[10px] font-bold text-amber-800 uppercase tracking-wider font-mono">Nombre de Reservación</label>
+                    <input
+                      id="table-reservation-name-input"
+                      type="text"
+                      placeholder="Ej. Familia Pérez"
+                      value={selectedTable.reservationName || ''}
+                      onChange={(e) => onUpdateTableStatus(selectedTable.id, 'reservada', e.target.value)}
+                      className="w-full bg-white border border-amber-200 focus:border-amber-500 rounded-xl px-3.5 py-2 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-amber-200 font-medium"
+                    />
+                  </div>
+                )}
               </div>
 
               {/* Dynamic State Actions panel */}

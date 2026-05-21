@@ -126,12 +126,16 @@ export default function App() {
   // Operational Logic Handlers
 
   // 1. Tables Status modifier
-  const handleUpdateTableStatus = (tableId: string, status: TableStatus) => {
+  const handleUpdateTableStatus = (tableId: string, status: TableStatus, reservationName?: string) => {
     setTables(prev => prev.map(t => {
       if (t.id === tableId) {
         // If transitioning back to "libre", make sure we clear the linked order reference
         const clearedAttrs = status === 'libre' ? { currentOrderId: undefined } : {};
-        return { ...t, status, ...clearedAttrs };
+        // Preserve or update reservationName if status is 'reservada'
+        const resAttrs = status === 'reservada' 
+          ? { reservationName: reservationName !== undefined ? reservationName : (t.reservationName || '') } 
+          : { reservationName: undefined };
+        return { ...t, status, ...clearedAttrs, ...resAttrs };
       }
       return t;
     }));

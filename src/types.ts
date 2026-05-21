@@ -14,6 +14,7 @@ export interface Table {
   capacity: number;
   status: TableStatus;
   currentOrderId?: string;
+  reservationName?: string;
 }
 
 export type OrderStatus = 'pendiente' | 'preparando' | 'listo' | 'entregado' | 'pagado';
