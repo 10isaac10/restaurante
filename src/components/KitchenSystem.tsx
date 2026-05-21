@@ -57,41 +57,41 @@ export default function KitchenSystem({
   };
 
   return (
-    <div className="flex-1 flex flex-col h-full bg-slate-900 text-slate-100 overflow-hidden">
+    <div className="flex-1 flex flex-col h-full bg-slate-50 text-slate-800 overflow-hidden">
       {/* KDS Header */}
-      <div className="px-8 py-5 shrink-0 bg-slate-950 border-b border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="px-8 py-5 shrink-0 bg-white border-b border-slate-200/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-amber-500/10 rounded-xl border border-amber-500/20">
-            <ChefHat className="h-6 w-6 text-amber-400" />
+          <div className="p-2.5 bg-amber-50 rounded-xl border border-amber-200">
+            <ChefHat className="h-6 w-6 text-amber-600" />
           </div>
           <div>
-            <h2 className="text-xl font-bold font-sans tracking-tight text-white">Monitor de Cocina (KDS)</h2>
-            <p className="text-xs text-slate-400">Control de cola de preparación de platillos y postres en vivo.</p>
+            <h2 className="text-xl font-bold font-sans tracking-tight text-slate-900 font-sans">Monitor de Cocina (KDS)</h2>
+            <p className="text-xs text-slate-500 font-medium">Control de cola de preparación de platillos y postres en vivo.</p>
           </div>
         </div>
 
         {/* Dynamic Ticket Counters */}
-        <div className="flex bg-slate-900 border border-slate-800 rounded-2xl p-1 gap-1">
+        <div className="flex bg-slate-50 border border-slate-200 rounded-2xl p-1 gap-1">
           <div className="px-3.5 py-1.5 rounded-xl flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-rose-500 animate-pulse"></span>
-            <span className="text-xs font-sans text-slate-400 font-medium">Pendiente: </span>
-            <span className="text-xs font-mono font-black text-rose-400">{pendingCount}</span>
+            <span className="text-xs font-sans text-slate-450 font-medium">Pendiente: </span>
+            <span className="text-xs font-mono font-bold text-rose-600">{pendingCount}</span>
           </div>
-          <div className="px-3.5 py-1.5 rounded-xl flex items-center gap-2 border-l border-slate-800/80">
+          <div className="px-3.5 py-1.5 rounded-xl flex items-center gap-2 border-l border-slate-200/60">
             <span className="h-2 w-2 rounded-full bg-amber-500"></span>
-            <span className="text-xs font-sans text-slate-400 font-medium">Cocinando: </span>
-            <span className="text-xs font-mono font-black text-amber-400">{preparingCount}</span>
+            <span className="text-xs font-sans text-slate-450 font-medium">Cocinando: </span>
+            <span className="text-xs font-mono font-bold text-amber-600">{preparingCount}</span>
           </div>
-          <div className="px-3.5 py-1.5 rounded-xl flex items-center gap-2 border-l border-slate-800/80 bg-slate-950">
+          <div className="px-3.5 py-1.5 rounded-xl flex items-center gap-2 border-l border-slate-200/60 bg-white shadow-xs">
             <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
-            <span className="text-xs font-sans text-slate-300 font-medium">Listo: </span>
-            <span className="text-xs font-mono font-black text-emerald-400">{readyCount}</span>
+            <span className="text-xs font-sans text-slate-705 font-medium">Listo: </span>
+            <span className="text-xs font-mono font-bold text-emerald-600">{readyCount}</span>
           </div>
         </div>
       </div>
 
       {/* Tickets Board */}
-      <div className="flex-1 p-8 overflow-x-auto overflow-y-hidden flex items-start gap-6 bg-slate-950/40">
+      <div className="flex-1 p-8 overflow-x-auto overflow-y-hidden flex items-start gap-6 bg-slate-100/40">
         {activeOrders.map((order) => {
           const mins = calculateMinutesElapsed(order.timestamp);
           const isOverdue = mins >= 15; // Warn if more than 15 mins
@@ -100,24 +100,24 @@ export default function KitchenSystem({
             <div 
               key={order.id} 
               id={`kds-card-${order.id}`}
-              className={`w-80 max-h-full rounded-2xl bg-slate-900 border-2 shadow-2xl flex flex-col shrink-0 ${
+              className={`w-80 max-h-full rounded-3xl bg-white border shadow-md flex flex-col shrink-0 ${
                 isOverdue 
-                  ? 'border-rose-700 shadow-rose-950/25' 
+                  ? 'border-rose-455 shadow-rose-100' 
                   : order.status === 'pendiente' 
-                  ? 'border-rose-500 shadow-slate-950/50' 
+                  ? 'border-indigo-200' 
                   : order.status === 'preparando' 
-                  ? 'border-amber-500 shadow-amber-950/10' 
-                  : 'border-emerald-600'
+                  ? 'border-amber-300' 
+                  : 'border-emerald-400'
               }`}
             >
               {/* Ticket Top Meta Details */}
-              <div className={`p-4 border-b rounded-t-xl ${
-                isOverdue ? 'bg-rose-950/20 border-slate-800' : 'bg-slate-850/40 border-slate-800'
+              <div className={`p-4 border-b rounded-t-[22px] ${
+                isOverdue ? 'bg-rose-50/50 border-rose-100' : 'bg-slate-50/70 border-slate-100'
               }`}>
                 <div className="flex justify-between items-start">
                   <div>
                     <span className="text-xs uppercase font-bold tracking-wider font-mono text-slate-400">Mesa</span>
-                    <h3 className="text-3xl font-black font-sans text-white leading-none mt-1">
+                    <h3 className="text-3xl font-black font-sans text-slate-800 leading-none mt-1">
                       #{order.tableNumber}
                     </h3>
                   </div>
@@ -128,10 +128,10 @@ export default function KitchenSystem({
                   </span>
                 </div>
 
-                <div className="mt-3 flex items-center justify-between text-xs text-slate-400 font-mono">
+                <div className="mt-3 flex items-center justify-between text-xs text-slate-500 font-mono">
                   <span>Atiende: {order.waiterName.split(' ')[0]}</span>
                   <div className={`flex items-center gap-1.5 px-2 py-0.5 rounded-md font-bold ${
-                    isOverdue ? 'bg-rose-900/40 text-rose-300 animate-pulse' : 'bg-slate-800 text-slate-300'
+                    isOverdue ? 'bg-rose-100 text-rose-700 animate-pulse' : 'bg-slate-100 text-slate-600'
                   }`}>
                     <Clock className="h-3.5 w-3.5" />
                     <span>{mins}m</span>
@@ -139,22 +139,22 @@ export default function KitchenSystem({
                 </div>
 
                 {order.customerName && (
-                  <div className="mt-2 text-xs text-amber-300 font-sans tracking-wide truncate">
-                    Cliente: <strong>{order.customerName}</strong>
+                  <div className="mt-2 text-xs text-slate-600 font-sans tracking-wide truncate">
+                    Cliente: <strong className="text-slate-800">{order.customerName}</strong>
                   </div>
                 )}
               </div>
 
               {/* Global instructions comment box */}
               {order.notes && (
-                <div className="px-4 py-2.5 bg-amber-500/10 border-b border-slate-800 flex gap-2 text-xs text-amber-300 font-sans">
+                <div className="px-4 py-2.5 bg-amber-50 border-b border-amber-100 flex gap-2 text-xs text-amber-800 font-sans">
                   <MessageSquare className="h-3.5 w-3.5 shrink-0 mt-0.5" />
                   <span>{order.notes}</span>
                 </div>
               )}
 
               {/* Items List inside Ticket */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-3">
+              <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-white">
                 {order.items.map((item, idx) => {
                   const itemStatus = item.status || 'pendiente';
                   return (
@@ -162,20 +162,20 @@ export default function KitchenSystem({
                       key={idx} 
                       className={`p-3 rounded-xl border transition-all ${
                         itemStatus === 'listo' 
-                          ? 'bg-slate-950/40 border-slate-800/50 text-slate-500 line-through' 
+                          ? 'bg-slate-50 border-slate-200 text-slate-400 line-through animate-fade-in' 
                           : itemStatus === 'preparando' 
-                          ? 'bg-amber-950/20 border-amber-900/50 text-slate-100' 
-                          : 'bg-slate-800 border-slate-800 text-slate-100'
+                          ? 'bg-amber-50/60 border-amber-200 text-slate-800 font-medium' 
+                          : 'bg-slate-50/30 border-slate-200 text-slate-800'
                       }`}
                     >
                       <div className="flex justify-between items-start gap-2.5">
                         <div className="flex items-center gap-2">
                           <span className={`h-6 w-6 font-mono font-black text-xs rounded-md flex items-center justify-center shrink-0 ${
                             itemStatus === 'listo' 
-                              ? 'bg-slate-800 text-slate-500' 
+                              ? 'bg-slate-200 text-slate-400' 
                               : itemStatus === 'preparando' 
-                              ? 'bg-amber-500 text-slate-950' 
-                              : 'bg-slate-700 text-emerald-400'
+                              ? 'bg-amber-500 text-white' 
+                              : 'bg-indigo-650 text-white'
                           }`}>
                             {item.quantity}
                           </span>
@@ -187,7 +187,7 @@ export default function KitchenSystem({
 
                       {/* Item level preparation instructions */}
                       {item.notes && (
-                        <div className="mt-2 text-[11px] font-mono text-amber-400/90 pl-8 italic">
+                        <div className="mt-2 text-[11px] font-mono text-amber-700 pl-8 italic">
                           ↳ {item.notes}
                         </div>
                       )}
@@ -199,7 +199,7 @@ export default function KitchenSystem({
                             <button
                               id={`item-prep-${order.id}-${idx}`}
                               onClick={() => onUpdateOrderItemStatus(order.id, item.id, 'preparando')}
-                              className="text-[10px] bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-400 px-2 py-1 rounded-md font-sans font-bold"
+                              className="text-[10px] bg-amber-50 hover:bg-amber-100 border border-amber-250 text-amber-750 px-2.5 py-1 rounded-md font-sans font-bold cursor-pointer transition-all"
                             >
                               Comenzar
                             </button>
@@ -208,7 +208,7 @@ export default function KitchenSystem({
                             <button
                               id={`item-ready-${order.id}-${idx}`}
                               onClick={() => onUpdateOrderItemStatus(order.id, item.id, 'listo')}
-                              className="text-[10px] bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/30 text-emerald-400 px-2 py-1 rounded-md font-sans font-bold"
+                              className="text-[10px] bg-emerald-50 hover:bg-emerald-100 border border-emerald-250 text-emerald-750 px-2.5 py-1 rounded-md font-sans font-bold cursor-pointer transition-all"
                             >
                               Listo ✔
                             </button>
@@ -221,11 +221,11 @@ export default function KitchenSystem({
               </div>
 
               {/* General Bottom Ticket Actions */}
-              <div className="p-4 border-t border-slate-800 bg-slate-900/60 flex flex-col gap-2">
+              <div className="p-4 border-t border-slate-100 bg-slate-50/50 flex flex-col gap-2 rounded-b-3xl">
                 {order.status === 'pendiente' && (
                   <button
                     onClick={() => onUpdateOrderStatus(order.id, 'preparando')}
-                    className="w-full py-2.5 bg-amber-500 hover:bg-amber-450 text-slate-950 font-bold text-xs rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     <Play className="h-4 w-4 fill-current outline-none" />
                     Atender Comanda Completa
@@ -238,7 +238,7 @@ export default function KitchenSystem({
                       // Mark complete
                       onUpdateOrderStatus(order.id, 'listo');
                     }}
-                    className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-555 text-white font-bold text-xs rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     <CheckCheck className="h-4 w-4" />
                     Comanda Lista para Entrega
@@ -248,7 +248,7 @@ export default function KitchenSystem({
                 {order.status === 'listo' && (
                   <button
                     onClick={() => onUpdateOrderStatus(order.id, 'entregado')}
-                    className="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl transition-all border border-slate-700 flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="w-full py-2.5 bg-white hover:bg-slate-50 text-slate-705 font-bold text-xs rounded-xl transition-all border border-slate-200 flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
                   >
                     <UtensilsCrossed className="h-4 w-4" />
                     Confirmar En Mesa (Mesero)
@@ -261,11 +261,11 @@ export default function KitchenSystem({
 
         {activeOrders.length === 0 && (
           <div className="flex-1 flex flex-col items-center justify-center text-center py-20">
-            <div className="p-4 bg-slate-900 rounded-full border border-slate-800 text-slate-600 mb-4 animate-bounce">
-              <ChefHat className="h-12 w-12" />
+            <div className="p-4 bg-white rounded-full border border-slate-200 text-slate-400 mb-4 animate-bounce shadow-xs">
+              <ChefHat className="h-12 w-12 text-slate-500" />
             </div>
-            <h4 className="text-base font-bold text-white">¡Cocina Limpia!</h4>
-            <p className="text-xs text-slate-400 mt-1 max-w-sm">
+            <h4 className="text-base font-bold text-slate-800">¡Cocina Limpia!</h4>
+            <p className="text-xs text-slate-400 mt-1 max-w-sm font-medium">
               No hay pedidos en cola en este momento. Las comandas enviadas por los meseros aparecerán aquí de inmediato.
             </p>
           </div>

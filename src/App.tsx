@@ -402,7 +402,7 @@ export default function App() {
   }
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-slate-900 text-slate-100 font-sans">
+    <div className="flex h-screen w-screen overflow-hidden bg-slate-50 text-slate-800 font-sans">
       
       {/* Sidebar navigation */}
       <Sidebar 

@@ -61,21 +61,21 @@ export default function Sidebar({
   }
 
   return (
-    <aside id="sidebar-nav" className="w-80 bg-slate-900 text-slate-100 flex flex-col border-r border-slate-800 shrink-0">
+    <aside id="sidebar-nav" className="w-80 bg-white text-slate-800 flex flex-col border-r border-slate-200/80 shrink-0 shadow-xs">
       {/* Brand Header */}
-      <div className="p-6 border-b border-slate-800 flex items-center gap-3">
-        <div className="p-2.5 bg-indigo-500/10 rounded-xl border border-indigo-500/20">
-          <Sparkles className="h-6 w-6 text-indigo-400" />
+      <div className="p-6 border-b border-slate-100 flex items-center gap-3">
+        <div className="p-2.5 bg-indigo-50 rounded-xl border border-indigo-100">
+          <Sparkles className="h-6 w-6 text-indigo-600" />
         </div>
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-white font-sans">RestoGest</h1>
-          <span className="text-xs text-slate-400 font-mono">Control de Operaciones</span>
+          <h1 className="text-xl font-bold tracking-tight text-slate-900 font-sans">RestoGest</h1>
+          <span className="text-xs text-slate-450 font-mono">Control de Operaciones</span>
         </div>
       </div>
 
       {/* Navigation */}
       <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
-        <p className="px-3 text-[10px] font-bold tracking-wider text-slate-500 uppercase font-mono mb-2">Módulos de Servicio</p>
+        <p className="px-3 text-[10px] font-bold tracking-wider text-slate-400 uppercase font-mono mb-2">Módulos de Servicio</p>
         
         {menuItems.map((item) => {
           const Icon = item.icon;
@@ -86,19 +86,19 @@ export default function Sidebar({
               key={item.id}
               id={`nav-tab-${item.id}`}
               onClick={() => setActiveTab(item.id)}
-              className={`w-full flex items-center justify-between px-3 py-3 rounded-xl text-sm font-medium transition-all duration-150 ${
+              className={`w-full flex items-center justify-between px-3 py-3 rounded-xl text-sm font-medium transition-all duration-155 ${
                 isActive 
-                  ? 'bg-indigo-600/15 text-indigo-400 border border-indigo-500/25 shadow-sm shadow-indigo-950/20' 
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 border border-transparent'
+                  ? 'bg-indigo-50 text-indigo-600 border border-indigo-200/50 shadow-xs font-semibold' 
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 border border-transparent'
               }`}
             >
               <div className="flex items-center gap-3">
-                <Icon className={`h-4.5 w-4.5 ${isActive ? 'text-indigo-400' : 'text-slate-400 group-hover:text-slate-200'}`} />
+                <Icon className={`h-4.5 w-4.5 ${isActive ? 'text-indigo-600' : 'text-slate-400 group-hover:text-slate-805'}`} />
                 <span className="font-sans font-medium">{item.label}</span>
               </div>
               
               {item.count > 0 && (
-                <span className={`px-2 py-0.5 text-xs font-mono font-bold rounded-full ${item.countColor || 'bg-slate-850 text-slate-300'}`}>
+                <span className={`px-2 py-0.5 text-xs font-mono font-bold rounded-full ${item.countColor || 'bg-slate-100 text-slate-650'}`}>
                   {item.count}
                 </span>
               )}
@@ -109,14 +109,14 @@ export default function Sidebar({
 
       {/* Active User Card & Logout button */}
       {currentUser && (
-        <div className="p-4 border-t border-slate-800 bg-slate-950/25 flex flex-col gap-3 font-sans">
+        <div className="p-4 border-t border-slate-100 bg-slate-50/50 flex flex-col gap-3 font-sans">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-indigo-500/10 rounded-full border border-indigo-500/25 text-indigo-400">
+            <div className="p-2 bg-indigo-50 rounded-full border border-indigo-100 text-indigo-600">
               <UserCheck className="h-4.5 w-4.5" />
             </div>
             <div className="overflow-hidden">
-              <p className="text-xs font-bold text-white truncate leading-tight">{currentUser.name}</p>
-              <p className="text-[10px] uppercase font-mono tracking-wider text-slate-400 mt-0.5">
+              <p className="text-xs font-bold text-slate-950 truncate leading-tight">{currentUser.name}</p>
+              <p className="text-[10px] uppercase font-mono tracking-wider text-slate-500 mt-0.5 font-semibold">
                 {currentUser.role === 'admin' ? 'Administrador' : currentUser.role === 'mesero' ? 'Mesero' : currentUser.role === 'chef' ? 'Chef / Cocina' : 'Cajero'}
               </p>
             </div>
@@ -124,7 +124,7 @@ export default function Sidebar({
           <button
             id="sidebar-logout-button"
             onClick={onLogout}
-            className="w-full py-2 bg-slate-800 hover:bg-slate-700 hover:text-rose-400 border border-slate-700/60 rounded-xl text-xs font-semibold text-slate-300 transition-all cursor-pointer flex items-center justify-center gap-1.5"
+            className="w-full py-2 bg-white hover:bg-slate-50 hover:text-rose-600 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-xs"
           >
             <LogOut className="h-3.5 w-3.5" />
             Cerrar Sesión
@@ -133,18 +133,18 @@ export default function Sidebar({
       )}
 
       {/* Quick Footer with Operational Status */}
-      <div className="p-4 border-t border-slate-800 bg-slate-950/40 text-xs text-slate-500 font-mono">
-        <div className="flex items-center justify-between text-slate-400 mb-1.5">
+      <div className="p-4 border-t border-slate-100 bg-slate-100/30 text-xs text-slate-500 font-mono">
+        <div className="flex items-center justify-between text-slate-550 mb-1.5">
           <span>Servidor Local</span>
-          <span className="flex items-center gap-1.5 text-indigo-400">
-            <span className="h-2 w-2 rounded-full bg-indigo-500 animate-pulse"></span>
+          <span className="flex items-center gap-1.5 text-indigo-600">
+            <span className="h-2 w-2 rounded-full bg-indigo-600 animate-pulse"></span>
             Activo
           </span>
         </div>
-        <div className="text-[11px] text-slate-400">
-          Turno: <span className="text-slate-300">Mediodía/Noche</span>
+        <div className="text-[11px] text-slate-500 font-medium">
+          Turno: <span className="text-slate-700">Mediodía/Noche</span>
         </div>
-        <div className="text-[10px] text-slate-500 mt-2">
+        <div className="text-[10px] text-slate-400 mt-2">
           © 2026 RestoGest Software ERP
         </div>
       </div>
