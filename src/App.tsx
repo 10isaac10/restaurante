@@ -441,6 +441,7 @@ export default function App() {
             staff={staff}
             orders={orders}
             onSubmitOrder={handleSubmitOrder}
+            onUpdateOrderStatus={handleUpdateOrderStatus}
             selectedTableIdFromProps={linkingTableId}
             resetSelectedTableId={() => setLinkingTableId(null)}
             currentUser={currentUser}
